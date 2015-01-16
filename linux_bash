@@ -1,4 +1,5 @@
 linux loop in array
+-------------------
 
 array=("a" "b" "c" "d")
 
