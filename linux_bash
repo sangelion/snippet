@@ -7,3 +7,15 @@ for i in ${array[@]}
 do
   echo $i
 done
+
+advance loop in array human parse
+---------------------------------
+
+array=()
+while IFS= read -r -p "Next item (end with an empty line): " line; do
+    [[ $line ]] || break  # break if line is empty
+    array+=("$line")
+done
+
+printf '%s\n' "Items read:"
+printf '  «%s»\n' "${array[@]}"
