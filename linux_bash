@@ -19,3 +19,14 @@ done
 
 printf '%s\n' "Items read:"
 printf '  «%s»\n' "${array[@]}"
+
+check file exist
+----------------
+
+if [ -f *.txt ]
+then
+        echo "File exist"
+else
+        echo "File not exist"
+fi
+
