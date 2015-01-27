@@ -30,3 +30,7 @@ else
         echo "File not exist"
 fi
 
+Replace text without open file editor
+
+cat ~/.config/xxx.conf | awk '{sub(/VGA1/,"VGA2")}1'
+
