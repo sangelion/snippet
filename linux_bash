@@ -34,3 +34,7 @@ Replace text without open file editor
 
 cat ~/.config/xxx.conf | awk '{sub(/VGA1/,"VGA2")}1'
 
+Check port connection
+---------------------
+
+ls /sys/class/drm/*/status | xargs -I {} -i bash -c "echo -n {}: ; cat {}"
