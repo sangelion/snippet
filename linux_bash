@@ -38,3 +38,24 @@ Check port connection
 ---------------------
 
 ls /sys/class/drm/*/status | xargs -I {} -i bash -c "echo -n {}: ; cat {}"
+
+Another array
+-------------
+
+id=(
+205249
+205449
+205790
+206119
+206197
+206267
+206269
+206299
+206344
+206412
+)
+
+        for i in "${id[@]}"
+        do
+          do something
+        done
