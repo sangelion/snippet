@@ -59,3 +59,25 @@ id=(
         do
           do something
         done
+
+Bash hash table
+---------------
+
+declare -A VIDEOS=( ["a"]="ayam"
+        ["b"]="burung")
+  
+
+        
+# A pretend Python dictionary with bash 3 
+ARRAY=( "cow:moo"
+        "dinosaur:roar"
+        "bird:chirp"
+        "bash:rock" )
+
+for animal in "${ARRAY[@]}" ; do
+    KEY=${animal%%:*}
+    VALUE=${animal#*:}
+    printf "%s likes to %s.\n" "$KEY" "$VALUE"
+done
+
+echo -e "${ARRAY[1]%%:*} is an extinct animal which likes to ${ARRAY[1]#*:}\n"
