@@ -1,0 +1,28 @@
+To update the pythonpath using code
+-----------------------------------
++
++import os
++import sys
++
++IOT_TEST_BASEDIR = os.path.dirname(os.path.abspath(__file__))
++
++if IOT_TEST_BASEDIR not in sys.path:
++    sys.path.append(IOT_TEST_BASEDIR)
+
++import os
++import sys
++
++VT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
++
++sys.path.append(VT_PATH)
+
++import os
+ # import exceptions, sys and string are unused
+
++uppath = lambda _path, n: os.sep.join(_path.split(os.sep)[:-n])
++# dir1 = uppath(__file__, 1)
++# print(dir1)
++WEB_DIR = uppath(__file__, 3) + "/iot_test_framework/utils/web/"
++
+
++sys.path.append(WEB_DIR)
