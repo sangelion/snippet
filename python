@@ -26,3 +26,7 @@ To update the pythonpath using code
 +
 
 +sys.path.append(WEB_DIR)
+
+argument parse
+--------------
+http://bioportal.weizmann.ac.il/course/python/PyMOTW/PyMOTW/docs/argparse/index.html
