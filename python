@@ -30,3 +30,18 @@ To update the pythonpath using code
 argument parse
 --------------
 http://bioportal.weizmann.ac.il/course/python/PyMOTW/PyMOTW/docs/argparse/index.html
+
+argument the module
+-------------------
+#!/usr/bin/env python
+
+import argparse
+import importlib
+
+config_descp = 'Configuration file from {BASEDIR}/config/CONFIG_FILE'
+parser = argparse.ArgumentParser()
+parser.add_argument('--config', dest='config_file', help=config_descp)
+args = parser.parse_args()
+
+config_module = "config." + args.config_file
+config = importlib.import_module(config_module)
