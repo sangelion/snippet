@@ -212,3 +212,13 @@ echo
 
 # ... or this
 # read
+
+cat configuration example
+-------------------------
+
+# cat << EOF > /var/lib/connman/<SSID>-psk.config
+[service_wifi_<hash>_managed_psk]
+Type = wifi
+Name = <SSID>
+Passphrase = <passphrase>
+EOF
