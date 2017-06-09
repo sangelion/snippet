@@ -45,3 +45,17 @@ args = parser.parse_args()
 
 config_module = "config." + args.config_file
 config = importlib.import_module(config_module)
+
+pythonpath-declaration systemd
+------------------------------
+[Unit]
+
+[Service]
+Type=idle
+User=root
+Environment='PYTHONPATH=locationofthepathwithinitpy'
+ExecStart=/usr/bin/python python.py
+RestartSec=10s
+Restart=on-failure
+
+[Install]
