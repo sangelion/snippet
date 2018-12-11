@@ -1,0 +1,87 @@
+tcpdump
+-------
+Capture all traffic on a single host:
+# tcpdump -pi eth0 host uberpc
+
+Capture all traffic on more than one host:
+# tcpdump -pi eth0 host uberpc and stinkpad and penguina
+
+Capture all traffic on more than one host, except from a specified host:
+# tcpdump -pi eth0 host uberpc and stinkpad and not penguina
+
+Capture traffic going to a host:
+# tcpdump -pi eth0 dst host uberpc530
+
+Capture traffic leaving a host:
+# tcpdump -pi eth0 src host uberpc
+
+Capture a single protocol:
+# tcpdump -pi eth0 tcp
+
+Capture more than one protocol:
+# tcpdump -pi eth0 tcp or udp or icmp
+
+Capture a specific port:
+# tcpdump -pi eth0 port 110
+
+Capture several ports:
+# tcpdump -pi eth0 port 25 or port 80 or port 110
+
+Capture a port range:
+# tcpdump -pi eth0 portrange 3000-4000
+
+Watch traffic leaving a port:
+# tcpdump -pi eth0 src port 110
+
+Watch traffic entering a port:
+# tcpdump -pi eth0 dst port 110
+
+Look for packets smaller than the specified size:
+# tcpdump -pi eth0 less 512
+
+Look for packets larger than the specified size:
+# tcpdump -pi eth0 greater 512
+
+Watch SSH connections from certain hosts:
+# tcpdump -pi eth0 src host uberpc or stinkpad and dst port 22
+
+Watch for traffic leaving one network and entering two other networks:
+# tcpdump -pi eth0 src net 192.168.1.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+
+The -X switch reads the data payload, but the default is to only read 68 bytes, so -s0
+displays the whole data payload, as this example from an IRC conversation shows:
+# tcpdump -X -s0 -pi eth0
+10:40:14.683350 IP 192.168.1.10.35386 > 12.222.222.107.6667: P 1:65(64) ack 410 win
+16022 <nop,nop,timestamp 1204830 3703450725>
+0x0000: 4500 0074 c43b 4000 4006 8157 c0a8 010a E..t.;@.@..W....
+0x0010: 8cd3 a66b 8a3a 1a0b 420f ddd1 bb15 eb3b ...k.:..B......;
+0x0020: 8018 3e96 4309 0000 0101 080a 0012 625e ..>.C.........b^
+0x0030: dcbe 2c65 5052 4956 4d53 4720 236c 696e ..,ePRIVMSG.#lin
+0x0040: 7578 6368 6978 203a 746f 2062 6520 6120 uxchix.:to.be.a.
+0x0050: 7375 7065 722d 7365 6b72 6974 2073 7079 super-sekrit.spy
+0x0060: 2c20 7573 6520 7468 6520 2d73 2073 7769 ,.use.the.-s.swi
+0x0070: 7463 680a tch.19.7 Using tcpdump to Capture and Analyze Traffic 
+
+This particular incantation:
+# tcpdump -pXi eth0 -w tcpdumpfile -s0 host stinkpad
+
+captures all traffic passing through Stinkpad, including data payload, and stores it in
+the file tcpdumpfile. You can read this file with:
+# tcpdump -r tcpdumpfile
+Directing tcpdump output to a file lets you study it at leisure, or open it with Wireshark
+to read it in a prettier interface. The -w switch creates a file format that Wireshark can
+read. 
+
+This command lets you see the live capture and store it in a file. This doesn’t create a
+file that Wireshark can read, but it does create a text file that you can parse with your
+favorite text-searching utilities:
+# tcpdump -pXi eth0 -s0 host stinkpad -l | tee tcpdumpfile
+
+This is a good way to catch infected hosts that are sending out spam because nobody
+should be sending anything from port 25 except your official mail servers:
+# tcpdump -pni eth0 dst port 25 and not src host mailserver1
+The -n switch turns off name resolution.
+
+Finally, you might want to use the -c switch to limit the number of packets captured:
+# tcpdump -c 1000 -pXi eth0 -w tcpdumpfile -s0
+Otherwise, it will run until you hit Ctrl-C
