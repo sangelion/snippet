@@ -1,5 +1,17 @@
 # Python Snippet
 
+## Virtualenv
+
+``` bash
+$ virtualenv --no-site-packages
+
+# to freeze the python packages
+$ pip freeze > requirements.txt
+
+# to use requirements.txt
+$ pip install -r requirements.txt
+```
+
 ## PYTHONPATH declaration in the script
 ``` python
 import os
