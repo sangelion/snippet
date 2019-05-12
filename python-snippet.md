@@ -2,6 +2,11 @@
 
 ## Virtualenv
 
+```bash
+~/.bashrc
+export PIP_REQUIRE_VIRTUALENV=true
+```
+
 ``` bash
 $ virtualenv --no-site-packages
 
