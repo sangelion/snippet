@@ -228,3 +228,12 @@ sed change or edit the line
 ---------------------------
 
 sed -i 's|^\(proc01 proc01\)$|#\1|' runtest/fs
+
+bash logging
+-----------
+#!/bin/#!/usr/bin/env bash
+
+function bash_log() {
+    exec > >(tee -ia $1.log)
+}
+
